@@ -1,8 +1,7 @@
-
 <div class="row" style="text-align: center; margin-top: 5%;">
   <div class="col-lg-4 col-md-8 col-sm-12 ml-auto mr-auto">
     <form>
-      <input type="email" class="form-control" style="border-radius: 10px" id="exampleFormControlInput1" placeholder="Application Id">
+      <input type="email" [formControl]="search" class="form-control" style="border-radius: 10px" id="exampleFormControlInput1" placeholder="Application Id" >
       <button type="submit" class="btn btn-primary mt-3">Submit</button>
     </form>
   </div>

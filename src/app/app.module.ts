@@ -9,6 +9,7 @@ import { AdminComponent } from './admin/admin.component';
 import { NewandupdatesComponent } from './newandupdates/newandupdates.component';
 import { PreventionComponent } from './prevention/prevention.component';
 import { SymptomsComponent } from './symptoms/symptoms.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -22,7 +23,9 @@ import { SymptomsComponent } from './symptoms/symptoms.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

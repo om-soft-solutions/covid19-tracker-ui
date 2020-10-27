@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+@media (min-width: 992px){
+  .nav-item{
+    padding-right: 20px !important;
+    padding-left: 20px !important;
+  }
+}
+
+.nav-item a:hover{
+  color: green;
+}
+
+.nav-item{
+  font-weight: bold;
+}
