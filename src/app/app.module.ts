@@ -10,6 +10,7 @@ import { NewandupdatesComponent } from './newandupdates/newandupdates.component'
 import { PreventionComponent } from './prevention/prevention.component';
 import { SymptomsComponent } from './symptoms/symptoms.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {HttpService} from "./service/http.service";
 
 @NgModule({
   declarations: [

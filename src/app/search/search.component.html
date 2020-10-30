@@ -1,8 +1,25 @@
 <div class="row" style="text-align: center; margin-top: 5%;">
-  <div class="col-lg-4 col-md-8 col-sm-12 ml-auto mr-auto">
+  <div class="col-lg-5 col-md-8 col-sm-12 ml-auto mr-auto">
     <form>
-      <input type="email" [formControl]="search" class="form-control" style="border-radius: 10px" id="exampleFormControlInput1" placeholder="Application Id" >
-      <button type="submit" class="btn btn-primary mt-3">Submit</button>
+      <div class="row">
+        <div class="col-8">
+          <input type="text" [disabled]="isOTPReceived" name="mobileOrEmail" [(ngModel)]="mobileOrEmail" (keyup)="reset($event)" class="form-control" style="border-radius: 10px" id="mobileOrEmail1" placeholder="Mobile Number/Email" >
+          <p *ngIf="errors" class="text-danger small text-left">please enter valid mobile number or Email ID</p>
+        </div>
+        <div class="col-4">
+          <button type="button" class="btn btn-primary mr-3" (click)="isOTPReceived=false">Edit</button>
+          <button type="button" [hidden]="isTimerOn" class="btn btn-primary" (click)="getOtp()">Get OTP</button>
+          <p [hidden]="!isTimerOn" [ngClass]="{'d-inline':isTimerOn}">{{timer$|async}}sec</p>
+        </div>
+      </div>
+      <div class="pt-4 row" *ngIf="isOTPReceived && !errors">
+        <div class="col-9">
+          <input type="text" class="form-control" style="border-radius: 10px" id="exampleFormControlInput1" placeholder="Enter OTP" >
+        </div>
+        <div class="col-3">
+          <button type="button" class="btn btn-primary w-100" name="Submit" (click)="getOtp()">Submit</button>
+        </div>
+      </div>
     </form>
   </div>
 </div>
