@@ -1,0 +1,25 @@
+label:not([class="form-check-label"])::after{
+  content: "*";
+  color: red;
+}
+
+.ng-valid[required], .ng-valid.required  {
+  border-left: 5px solid #42A948; /* green */
+}
+
+.ng-invalid:not(form)  {
+  border-left: 5px solid #a94442; /* red */
+}
+
+.alert{
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  font-size: 14px;
+}
+
+.form-control{
+  border-radius: 0;
+  box-shadow: 0 0 0 0;
+}

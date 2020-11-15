@@ -1,12 +1,13 @@
+<!--
 <div class="row" style="text-align: center; margin-top: 5%;">
   <div class="col-lg-5 col-md-8 col-sm-12 ml-auto mr-auto">
     <form>
       <div class="row">
-        <div class="col-8">
+        <div class="col-12">
           <input type="text" [disabled]="isOTPReceived" name="mobileOrEmail" [(ngModel)]="mobileOrEmail" (keyup)="reset($event)" class="form-control" style="border-radius: 10px" id="mobileOrEmail1" placeholder="Mobile Number/Email" >
-          <p *ngIf="errors" class="text-danger small text-left">please enter valid mobile number or Email ID</p>
+          <p *ngIf="errors" class="text-danger small text-left">Please enter valid mobile number or Email ID</p>
         </div>
-        <div class="col-4">
+        <div class="col-12" style="margin-top: 10px">
           <button type="button" class="btn btn-primary mr-3" (click)="isOTPReceived=false">Edit</button>
           <button type="button" [hidden]="isTimerOn" class="btn btn-primary" (click)="getOtp()">Get OTP</button>
           <p [hidden]="!isTimerOn" [ngClass]="{'d-inline':isTimerOn}">{{timer$|async}}sec</p>
@@ -14,11 +15,43 @@
       </div>
       <div class="pt-4 row" *ngIf="isOTPReceived && !errors">
         <div class="col-9">
-          <input type="text" class="form-control" style="border-radius: 10px" id="exampleFormControlInput1" placeholder="Enter OTP" >
+          <input type="text" class="form-control" name="otpInput" [(ngModel)]="otp" style="border-radius: 10px" placeholder="Enter OTP" >
         </div>
         <div class="col-3">
-          <button type="button" class="btn btn-primary w-100" name="Submit" (click)="getOtp()">Submit</button>
+          <button type="button" class="btn btn-primary w-100" name="Submit" (click)="getDetails()">Submit</button>
         </div>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="row mt-5">
+  <div class="col-lg-6 col-md-8 col-sm-12 ml-auto mr-auto">
+    <table class="table" *ngIf="patientList">
+      <thead class="thead-light">
+        <th>Application ID</th>
+        <th>Name</th>
+        <th>Covid Status</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let patient of patientList">
+          <td>{{patient.applicationNumber}}</td>
+          <td>{{patient.name}}</td>
+          <td>{{patient.status}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+-->
+<div class="row" style="margin-top: 5%;">
+  <div class="col-lg-5 col-md-8 col-sm-12 ml-auto mr-auto">
+    <form #searchForm="ngForm">
+      <div class="form-group">
+        <input id="ApplicationNumber" name="application1" class="shadow form-control" [(ngModel)]="application" #application1="ngModel" required placeholder="Enter Application Number">
+        <div *ngIf="application1.invalid && (application1.dirty || application1.touched)" class="alert alert-danger">Application Number is required</div>
+      </div>
+      <div class="mt-4 mb-5 mr-auto ml-auto text-center">
+        <button type="submit" class="btn btn-primary" [disabled]="!searchForm.form.valid" >Search</button>
       </div>
     </form>
   </div>

@@ -5,6 +5,7 @@ import {RegisterComponent} from "./register/register.component";
 import {SymptomsComponent} from "./symptoms/symptoms.component";
 import {PreventionComponent} from "./prevention/prevention.component";
 import {NewandupdatesComponent} from "./newandupdates/newandupdates.component";
+import {AdminComponent} from "./admin/admin.component";
 
 const routes: Routes = [
   {path:'search', component: SearchComponent},
@@ -12,6 +13,7 @@ const routes: Routes = [
   {path: 'symptoms', component: SymptomsComponent},
   {path: 'prevention', component: PreventionComponent},
   {path: 'news', component: NewandupdatesComponent},
+  {path: 'login', component: AdminComponent},
   {path: '', redirectTo: 'search', pathMatch: 'full'},
   {path: '**', component: SearchComponent}
 ];

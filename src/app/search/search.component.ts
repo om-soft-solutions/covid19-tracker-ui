@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Observable, timer} from "rxjs";
 import {finalize, map, take} from "rxjs/operators";
+import {HttpService} from "../service/http.service";
+import {Patient} from "../models/patient";
 
 @Component({
   selector: 'app-search',
@@ -15,8 +17,11 @@ export class SearchComponent implements OnInit {
   regexp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   isTimerOn: boolean;
   timer$: Observable<Number>;
+  otp: number;
+  patientList: Patient[];
+  application: string;
 
-  constructor() { }
+  constructor(private httpService: HttpService) { }
 
   ngOnInit(): void {
   }
@@ -56,5 +61,11 @@ export class SearchComponent implements OnInit {
       map(()=>--count),
       finalize(() => {this.isTimerOn=false})
     )
+  }
+
+  getDetails() {
+    this.httpService.getPatientDetails(this.mobileOrEmail,this.otp).subscribe(value => {
+        this.patientList = value;
+    });
   }
 }
