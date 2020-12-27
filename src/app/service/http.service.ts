@@ -4,7 +4,6 @@ import {Patient} from "../models/patient";
 import {Observable} from "rxjs";
 import {GenericResponse} from "../models/genericresponse";
 import {tap} from "rxjs/operators";
-import {CountryCodes} from "../models/countrycodes";
 
 @Injectable({
   providedIn: 'root'
@@ -63,9 +62,5 @@ export class HttpService {
       let params:HttpParams = new HttpParams({fromString: "mobileOrEmail="+mobileOrEmail+"&otp="+otp});
     console.log(params);
       return this.http.get<GenericResponse<Patient[]>>(this.baseUrl+this.searchForPatientURL,{params: params});
-  }
-
-  countryCodesList(): Observable<CountryCodes[]>{
-    return this.http.get<CountryCodes[]>("assets/country_codes.json");
   }
 }

@@ -6,5 +6,4 @@ export interface Patient {
   age: number;
   email: string;
   status: string;
-  countryCode: string;
 }

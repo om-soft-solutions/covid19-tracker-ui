@@ -2,7 +2,6 @@ import { Component} from '@angular/core';
 import {Patient} from "../models/patient";
 import {HttpService} from "../service/http.service";
 import {NgForm} from "@angular/forms";
-import {CountryCodes} from "../models/countrycodes";
 
 declare var jQuery:any;
 
@@ -25,11 +24,8 @@ export class RegisterComponent {
 
   errors: any;
   isRegisterDisabled: boolean = false;
-  countryCodes: CountryCodes[];
-  countryCode: string = "91";
 
   constructor(private http: HttpService) {
-    http.countryCodesList().subscribe(value => this.countryCodes=value);
   }
 
   registerTest(registerForm: NgForm) {
