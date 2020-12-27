@@ -1,7 +1,8 @@
-<div class="container-fluid" id="main">
+<div style="position:relative;">
+  <div class="container-fluid" id="main">
   <div class="row">
     <div class="col-12 header p-0">
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light pb-0 mb-0">
         <a class="navbar-brand" style="height: 50px; width: 50px" href="#"><img style="  animation: 2s circle infinite;" width="85%" height="100%" src="assets/coronavirus_1.png"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -9,27 +10,39 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent" >
           <ul class="navbar-nav mr-auto ml-auto">
             <li class="nav-item active">
-              <a id="home" class="nav-link" routerLink="search">Home</a>
+              <a id="search" class="nav-link" routerLink="search">Home</a>
             </li>
             <li class="nav-item">
               <a id="register" class="nav-link" routerLink="register">Register</a>
             </li>
             <li class="nav-item">
-              <a id="revention" class="nav-link" routerLink="prevention">Prevention</a>
-            </li>
-            <li class="nav-item">
-              <a id="news" class="nav-link" routerLink="news">News</a>
+              <a id="prevention" class="nav-link" routerLink="prevention">Prevention</a>
             </li>
             <li class="nav-item">
               <a id="symptoms" class="nav-link" routerLink="symptoms">Symptoms</a>
             </li>
           </ul>
           <div class="nav-item">
-            <a href="#" id="login" class="btn btn-link btn-sm nav-link" routerLink="login">Log In</a>
+            <a href="#" id="login" style="box-shadow: 0 0 0 0;" class="btn btn-link btn-sm nav-link d-inline-block" routerLink="login" *ngIf="!this.httpService.isLoggedIn">Log In</a>
           </div>
         </div>
       </nav>
     </div>
   </div>
+    <div class="row" style="margin-right: 50px;margin-top: 30px" *ngIf="this.httpService.isLoggedIn">
+      <div class="col">
+        <div class="dropdown float-right">
+          <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Hi {{this.httpService.username}}
+          </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <a class="dropdown-item" routerLink="admin">Update Status</a>
+              <a class="dropdown-item" routerLink="login">Logout</a>
+          </div>
+        </div>
+      </div>
+    </div>
   <router-outlet></router-outlet>
+</div>
+<footer class="mt-5 mb-3 text-center small text-muted">&copy; covid19tracker.com, All rights reserved</footer>
 </div>

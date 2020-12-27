@@ -13,13 +13,14 @@ export class SearchComponent implements OnInit {
 
   mobileOrEmail: any;
   isOTPReceived: boolean;
-  errors: boolean;
+  errors: Record<string, string>;
   regexp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   isTimerOn: boolean;
   timer$: Observable<Number>;
   otp: number;
   patientList: Patient[];
-  application: string;
+  application: any;
+  isValid: boolean;
 
   constructor(private httpService: HttpService) { }
 
@@ -27,31 +28,34 @@ export class SearchComponent implements OnInit {
   }
 
   getOtp() {
+    this.isTimerOn=false;
+    this.isOTPReceived=false;
+    this.patientList=null;
+    this.errors=null;
     if(this.validate()){
-        this.isTimerOn=true;
-        this.startTimer();
-        // TODO:will make a http call
-        this.isOTPReceived=true;
-    }else {
-      this.errors=true;
+        this.httpService.getOtp(this.application).subscribe(
+          success => {
+            this.isTimerOn=true;
+            this.startTimer();
+            this.isOTPReceived=true;
+          },
+          error => {
+            console.log(error);
+            if(error?.error?.errors){
+              this.errors = error.error.errors;
+            }
+          });
     }
   }
 
-  private validate():boolean{
-      if(this.mobileOrEmail && ((!isNaN(this.mobileOrEmail) && this.mobileOrEmail.length ==10) || this.regexp.test(this.mobileOrEmail))){
+   validate():boolean{
+      if(this.application && ((!isNaN(this.application) && this.application.length ==10) || this.regexp.test(this.application))){
+        this.isValid=true;
         return true;
+      }else{
+        this.isValid=false;
       }
     return false;
-  }
-
-  reset(event: KeyboardEvent) {
-    let isValid = this.validate();
-    if(!isValid){
-      this.errors = true;
-      this.isOTPReceived=false;
-    }else {
-      this.errors = false;
-    }
   }
 
   private startTimer() {
@@ -67,5 +71,22 @@ export class SearchComponent implements OnInit {
     this.httpService.getPatientDetails(this.mobileOrEmail,this.otp).subscribe(value => {
         this.patientList = value;
     });
+  }
+
+  searchForPatient() {
+    this.httpService.searchForPatient(this.application,this.otp).subscribe(
+      data => {
+        console.log(data.response);
+        this.patientList = data.response;
+      },
+      error => {
+        console.log(error);
+        if(error?.error?.errors) {
+          this.errors=error.error.errors;
+        }else{
+          this.errors = {"generic_error":"Unable to perform operation. please check with administrator"}
+        }
+      }
+    );
   }
 }

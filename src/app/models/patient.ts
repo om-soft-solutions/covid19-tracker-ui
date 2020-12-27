@@ -1,5 +1,10 @@
 export interface Patient {
-  applicationNumber: string;
+  applicationId: string;
   name: string;
+  mobileNumber:string;
+  gender: string;
+  age: number;
+  email: string;
   status: string;
+  countryCode: string;
 }

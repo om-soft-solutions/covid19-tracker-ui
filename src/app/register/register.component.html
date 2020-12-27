@@ -1,50 +1,86 @@
 <div class="row">
   <div class="col-lg-4 col-md-8 col-sm-12 mr-auto ml-auto mt-3 pt-2">
+    <div *ngIf="errors?.generic_error" class="alert alert-danger fade show" role="alert">
+      {{errors?.generic_error}}
+    </div>
     <p style="text-align: center" class="text-danger mb-4">* marked fields are mandatory</p>
-    <form #registerForm="ngForm">
+    <form #registerForm="ngForm" (ngSubmit)="registerTest(registerForm)">
+      <input [(ngModel)]="patient.applicationId" name="applicationId" hidden>
       <div class="form-group">
         <label for="Name">Name: </label>
-        <input id="name" name="name1" class="shadow form-control" [(ngModel)]="name" #name1="ngModel" required>
+        <input id="name" name="name1" class="shadow form-control" [(ngModel)]="patient.name" #name1="ngModel" required>
         <div *ngIf="name1.invalid && (name1.dirty || name1.touched)" class="alert alert-danger">Name is required</div>
+        <div *ngIf="!name1.errors && errors?.name"  class="alert alert-danger">{{errors?.name}}</div>
+      </div>
+      <div class="form-group">
+        <label for="countryCode">Country Code: </label>
+        <select class="shadow" name="countryCode" id="countryCode" [(ngModel)]="patient.countryCode">
+          <option *ngFor="let code of countryCodes" [ngValue]="code.Dial">{{code.Name}} (+{{code.Dial}})</option>
+        </select>
       </div>
       <div class="form-group">
         <label for="mobile">Mobile Number: </label>
-        <input name="mobile1" [(ngModel)]="mobile" maxlength="12" minlength="12" class="shadow form-control" id="mobile" #mobile1="ngModel" required>
+        <input name="mobile1" [(ngModel)]="patient.mobileNumber" maxlength="10" minlength="10" class="shadow form-control" id="mobile" #mobile1="ngModel" required>
         <div *ngIf="mobile1.errors?.required && (mobile1.dirty || mobile1.touched)" class="alert alert-danger">Mobile number is required</div>
         <div *ngIf="mobile1.errors?.minlength" class="alert alert-danger">
           mobile number must be 12 digits including country code.
         </div>
+        <div *ngIf="!mobile1.errors && errors?.mobileNumber" class="alert alert-danger">{{errors?.mobileNumber}}</div>
       </div>
       <div class="form-group form-check-inline">
         <div>
           Gender:<span class="text-danger">*</span>
         </div>
         <div class="form-check">
-            <input type="radio" name="gender" [(ngModel)]="gender" value="male" class="form-check-input" id="male">
+            <input type="radio" name="gender" [(ngModel)]="patient.gender" value="male" class="form-check-input" id="male">
             <label class="form-check-label" for="male">Male</label>
         </div>
         <div class="form-check">
-          <input type="radio" name="gender" [(ngModel)]="gender" value="female" class="form-check-input" id="female">
+          <input type="radio" name="gender" [(ngModel)]="patient.gender" value="female" class="form-check-input" id="female">
           <label class="form-check-label" for="female">Female</label>
         </div>
+        <div *ngIf="errors?.gender" class="alert alert-danger">{{errors?.gender}}</div>
       </div>
       <div class="form-group">
         <label for="age">Age: </label>
-        <input type="number" class="shadow form-control" [(ngModel)]="age" name="age1" #age1="ngModel" id="age" aria-describedby="age" required>
-        <div *ngIf="(age<1 || age>120  || age1.errors?.required) && (age1.dirty || age1.touched)" class="alert alert-danger">
-          Age must be between 1 and 120
+        <input type="number" class="shadow form-control" [(ngModel)]="patient.age" name="age1" #age1="ngModel" id="age" aria-describedby="age" required>
+        <div *ngIf="(patient.age<0 || patient.age>100  || age1.errors?.required) && (age1.dirty || age1.touched)" class="alert alert-danger">
+          Age must be between 0 and 100
         </div>
+        <div *ngIf="patient.age>=0 && patient.age<=100 && !age1.errors && errors?.age" class="alert alert-danger">{{errors?.age}}</div>
       </div>
       <div class="form-group">
         <label for="email">Email: </label>
-        <input type="email" name="email1" #email1="ngModel" [(ngModel)]="email" class="shadow form-control" id="email" aria-describedby="age" required email>
+        <input type="email" name="email1" #email1="ngModel" [(ngModel)]="patient.email" class="shadow form-control" id="email" aria-describedby="age" required email>
         <div *ngIf="(email1.errors?.required || email1.errors?.email) && (email1.dirty || email1.touched)" class="alert alert-danger">
           please enter valid email address
         </div>
+        <div *ngIf="!email1.errors && errors?.email" class="alert alert-danger">{{errors?.email}}</div>
       </div>
       <div class="mt-4 mb-5 mr-auto ml-auto text-center">
-        <button type="submit" class="btn btn-primary" [disabled]="!registerForm.form.valid" >Register</button>
+        <button type="submit" class="btn btn-primary" [disabled]="!registerForm.form.valid" [disabled]="isRegisterDisabled">Register</button>
       </div>
     </form>
+  </div>
+</div>
+<div class="modal fade" id="registrationModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="mt-3 mr-3">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="p-3 text-center">
+          <p>You have Successfully register for the test.</p>
+          <p>Application id is <b>{{patient.applicationId}}</b> will be sent to your Mobile Number: <b>{{patient.mobileNumber}}.</b></p>
+          <p>Save the Application ID for future purposes</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
   </div>
 </div>

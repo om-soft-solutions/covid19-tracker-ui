@@ -6,6 +6,7 @@ import {SymptomsComponent} from "./symptoms/symptoms.component";
 import {PreventionComponent} from "./prevention/prevention.component";
 import {NewandupdatesComponent} from "./newandupdates/newandupdates.component";
 import {AdminComponent} from "./admin/admin.component";
+import {AdminscreenComponent} from "./adminscreen/adminscreen.component";
 
 const routes: Routes = [
   {path:'search', component: SearchComponent},
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path: 'prevention', component: PreventionComponent},
   {path: 'news', component: NewandupdatesComponent},
   {path: 'login', component: AdminComponent},
+  {path: 'admin', component: AdminscreenComponent},
   {path: '', redirectTo: 'search', pathMatch: 'full'},
   {path: '**', component: SearchComponent}
 ];

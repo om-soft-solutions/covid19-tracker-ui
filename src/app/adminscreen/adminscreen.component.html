@@ -1,0 +1,75 @@
+<div class="row">
+  <div class="col-lg-5 col-sm-12 col-md-8 mr-auto ml-auto mt-4">
+    <h2 class="text-center">Welcome {{user}}!!</h2>
+  </div>
+</div>
+<div class="row" *ngIf="errors">
+  <div class="col-lg-6 col-md-10 col-sm-12 mr-auto ml-auto">
+    <div class="alert alert-danger text-center">
+      {{errors['generic_error']}}
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-5 col-sm-12 col-md-8 mr-auto ml-auto mt-4">
+    <div>
+      <form #searchForm="ngForm">
+        <div class="form-group">
+          <input id="ApplicationNumber" name="application1" class="shadow form-control" [(ngModel)]="application" #application1="ngModel" required placeholder="Enter Application/mobile Number/Email">
+          <div *ngIf="application1.errors?.required && (application1.dirty || application1.touched)" class="alert alert-danger small">Enter valid Application or Mobile Number or Email</div>
+          <div class="mt-2 text-center">
+            <button class="btn btn-primary" [disabled]="!searchForm.valid || isSubmitDisabled" (click)="search()">Search</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div *ngIf="patientsList" class="col-lg-9 col-md-12 col-sm-12 mr-auto ml-auto">
+  <form (ngSubmit)="updateStatus()">
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th>Application ID</th>
+          <th>Name</th>
+          <th>Mobile Number</th>
+          <th>Email</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tr *ngFor="let patient of patientsList">
+        <td>{{patient.applicationId}}</td>
+        <td>{{patient.name}}</td>
+        <td>{{patient.mobileNumber}}</td>
+        <td>{{patient.email}}</td>
+        <td>
+          <select [(ngModel)]="patient.status" name="status{{patient.applicationId}}">
+            <option *ngFor="let status of STATUS" [ngValue]="status.key">{{status.value}}</option>
+          </select>
+        </td>
+      </tr>
+    </table>
+    <div class="mt-4 mb-5 mr-auto ml-auto text-center">
+      <button type="submit" class="btn btn-primary" [disabled]="isUpdateStatusDisabled || !patientsList || patientsList.length<1">Update</button>
+    </div>
+  </form>
+</div>
+<div class="modal fade" id="statusSuccessModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="mt-3 mr-3">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="p-3 text-center">
+          <p>Status updated Successfully!!!</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -33,9 +33,17 @@
 */
 
 .active{
-  color: #a94442 !important;
+  /*color: red !important;*/
+  font-weight: bolder !important;
 }
 
 .nav-item a{
   color: inherit !important;
+  font-weight: inherit;
+}
+
+@media (min-width: 992px) {
+  .border-red {
+    border-bottom: 3px solid red !important;
+  }
 }

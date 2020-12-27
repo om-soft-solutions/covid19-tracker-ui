@@ -12,6 +12,7 @@ import { SymptomsComponent } from './symptoms/symptoms.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpService} from "./service/http.service";
 import {HttpClientModule} from "@angular/common/http";
+import { AdminscreenComponent } from './adminscreen/adminscreen.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import {HttpClientModule} from "@angular/common/http";
     AdminComponent,
     NewandupdatesComponent,
     PreventionComponent,
-    SymptomsComponent
+    SymptomsComponent,
+    AdminscreenComponent
   ],
   imports: [
     BrowserModule,

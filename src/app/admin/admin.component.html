@@ -1,6 +1,6 @@
 <div class="row" style="margin-top: 5%;">
   <div class="col-lg-4 col-md-8 col-sm-12 ml-auto mr-auto">
-    <form #loginform="ngForm">
+    <form #loginform="ngForm" (ngSubmit)="authenticate()">
       <div class="form-group">
         <label for="username">UserName: </label>
         <input id="username" name="username1" class="shadow form-control" [(ngModel)]="username" #username1="ngModel" required placeholder="Enter UserName">
@@ -10,6 +10,12 @@
         <label for="password">Password: </label>
         <input type="password" id="password" name="password1" class="shadow form-control" [(ngModel)]="password" #password1="ngModel" required placeholder="Enter Password">
         <div *ngIf="password1.invalid && (password1.dirty || password1.touched)" class="alert alert-danger">Password is required</div>
+      </div>
+      <div class="form-group">
+        <label for="role1">Role: </label>
+        <select class="form-control" id="role1" [(ngModel)]="role" name="role1">
+          <option *ngFor="let role of ROLES" [ngValue]="role.key">{{role.value}}</option>
+        </select>
       </div>
       <div class="mt-4 mb-5 mr-auto ml-auto text-center">
         <button type="submit" class="btn btn-primary" [disabled]="!loginform.form.valid" >Log In</button>
