@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
+import {SharedService} from '../service/shared.service';
 
 @Component({
   selector: 'app-prevention',
@@ -7,9 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PreventionComponent implements OnInit {
 
-  constructor() { }
+  constructor(private sharedService: SharedService) { }
 
   ngOnInit(): void {
+    this.sharedService.activeLabel('prevention');
   }
 
 }

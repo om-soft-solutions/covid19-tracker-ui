@@ -43,7 +43,26 @@
 }
 
 @media (min-width: 992px) {
-  .border-red {
-    border-bottom: 3px solid red !important;
+
+  .border-red{
+    background: red;
+    height: 3px;
+    width: 0;
+    animation: animates1 1s infinite;
   }
+
+  @keyframes animates1 {
+    0% {width: 0}
+    50% {width: 100%}
+    100% {width: 0}
+  }
+
+  .dropdown-menu {
+    left: auto !important;
+  }
+
+  #notification{
+    left:0 !important;
+  }
+
 }

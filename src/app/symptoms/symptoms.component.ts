@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {SharedService} from '../service/shared.service';
 
 @Component({
   selector: 'app-symptoms',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SymptomsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private sharedService: SharedService) { }
 
   ngOnInit(): void {
+    this.sharedService.activeLabel('symptoms');
   }
 
 }

@@ -51,6 +51,12 @@
         </div>
         <div *ngIf="!email1.errors && errors?.email" class="alert alert-danger">{{errors?.email}}</div>
       </div>
+      <div class="form-group">
+        <label for="hospital1">Hospital: </label>
+        <select class="form-control" id="hospital1" [(ngModel)]="patient.hospital1" name="hospital1" required>
+          <option *ngFor="let hospital of hospitalsList" [ngValue]="hospital.hospitalCode">{{hospital.hospitalName}}</option>
+        </select>
+      </div>
       <div class="mt-4 mb-5 mr-auto ml-auto text-center">
         <button type="submit" class="btn btn-primary" [disabled]="!registerForm.form.valid" [disabled]="isRegisterDisabled">Register</button>
       </div>
