@@ -15,7 +15,7 @@ export class HttpService {
     username: string;
     password: string;
     role: string;
-    baseUrl = 'http://localhost:8081';
+    baseUrl = '/api/v1';
     registerTestURL = '/patient/registerTest';
     adminAuthenticateURL = '/admin/authenticate';
     adminSearchByIdURL = '/admin/searchForPatient';

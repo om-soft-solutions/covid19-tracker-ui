@@ -17,3 +17,7 @@ $('document').ready(function () {
   $(ser).parent().addClass('active');
 })
 */
+
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();
+});
