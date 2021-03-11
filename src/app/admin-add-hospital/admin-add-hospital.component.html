@@ -9,7 +9,7 @@
       <form #addHospitalForm="ngForm" (ngSubmit)="addHospital(addHospitalForm)">
         <div class="form-group">
           <label for="hospitalCode">Hospital Code: </label>
-          <input id="hospitalCode" name="hospitalCode1" class="shadow form-control" [ngModel]="hospital && hospital.hospitalCode | uppercase" (ngModelChange)="hospital.hospitalCode=$event.toUpperCase()" #hospitalCode1="ngModel" required placeholder="Enter Hospital Code">
+          <input id="hospitalCode" name="hospitalCode1" class="shadow form-control" [ngModel]="hospital && (hospital.hospitalCode | uppercase)" (ngModelChange)="hospital.hospitalCode=$event.toUpperCase()" #hospitalCode1="ngModel" required placeholder="Enter Hospital Code">
           <div *ngIf="hospitalCode1.invalid && (hospitalCode1.dirty || hospitalCode1.touched)" class="alert alert-danger">username is required</div>
         </div>
         <div class="form-group">

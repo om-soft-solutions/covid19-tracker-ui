@@ -43,7 +43,7 @@ export class AdminscreenComponent implements OnInit {
     this.password = this.http.password;
     this.role = this.http.role;
     if (this.role !== 'admin') { this.pageHeader = 'Update Status of Tests'; }
-    else { this.pageHeader = 'Create User'; }
+    else { this.pageHeader = 'Add Lab Technician'; }
     const token = sessionStorage.getItem('token');
     if (!this.user || !this.password || !token || token === ''){
       sessionStorage.setItem('token', '');

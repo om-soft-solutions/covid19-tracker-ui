@@ -35,7 +35,7 @@
               <div class="dropdown-menu" style="font-weight: normal;right: 0;left:0">
                 <a class="dropdown-item" routerLink="admin">
                   <span *ngIf="this.httpService.role==='lab_tech'" >Update Status</span>
-                  <span *ngIf="this.httpService.role==='admin'">Create User</span>
+                  <span *ngIf="this.httpService.role==='admin'">Add Technician</span>
                 </a>
                 <a *ngIf="this.httpService.role==='admin'" class="dropdown-item" routerLink="addHospital">Add Hospital</a>
                 <a class="dropdown-item" routerLink="changePass">Change Password</a>
