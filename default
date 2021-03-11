@@ -15,8 +15,8 @@ server{
    listen 443 ssl;
    server_name <WEB SERVER IP>;
 
-   ssl_certificate /etc/nginx/domain.crt;
-   ssl_certificate_key /etc/nginx/domain.key;
+   ssl_certificate /home/ubuntu/domain.crt;
+   ssl_certificate_key /home/ubuntu/domain.key;
 
    location / {
            root /var/www/html;
